@@ -1,6 +1,6 @@
 # CoachChauffeurCarService
 
-Coach Chauffeur Car Service is a web application that allows users to book rides and delivery services. Users can create an account, set their location, browse available services, book a ride or delivery, make secure payments, and track the status.
+Coach Chauffeur Car Service is a web application that allows users to book rides and delivery services. Users can create an account, browse available services, book a ride or delivery, make secure payments, and track the status.
 
 <b>Features</b>
 * User account creation and management
