@@ -51,7 +51,7 @@ var getTripParams = function getTripParams(body) {
 };
 
 function calculateTravelTime(pickupAddress, dropOffAddress) {
-  var url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".concat(encodeURIComponent(pickupAddress), "&destinations=").concat(encodeURIComponent(dropOffAddress), "&units=imperial&key=").concat(process.env.MPASS);
+  var url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".concat(encodeURIComponent(pickupAddress), "&destinations=").concat(encodeURIComponent(dropOffAddress), "&units=imperial&key=AIzaSyAV40-7YnOohlzydiiZsT4VN8ZGscHwdno");
   var config = {
     method: 'get',
     url: url,
@@ -452,7 +452,7 @@ module.exports = {
             }
 
             res.locals.redirect = '/trips/new';
-            req.flash('error', 'Trip must be at least 4 hours long.');
+            req.flash('error', 'Road trip must be at least 4 hours long.');
             next();
             return _context4.abrupt("return");
 
@@ -678,7 +678,7 @@ module.exports = {
             }
 
             res.locals.redirect = "/trips/".concat(tripId, "/verify-edit");
-            req.flash('error', 'Trip must be at least 4 hours long.');
+            req.flash('error', 'Road trip must be at least 4 hours long.');
             next();
             return _context5.abrupt("return");
 

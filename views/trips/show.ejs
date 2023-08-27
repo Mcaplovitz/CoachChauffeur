@@ -54,17 +54,22 @@
 				<p><strong>Car Type:</strong> <%= trip.carType %></p>
 				<p><strong>Special Instructions:</strong> <%= trip.specialInstructions %></p>
 				<p><strong>Approval Status:</strong> <%= trip.tripStatus %></p>
-				<% if (trip.tripStatus === "Completed" && !trip.refunded) { %>
-				<button class="refund-button" onclick="window.location.href='/trips/<%= trip._id %>/refund'">Request a refund</button>
+				<% if(trip.tripType === "Road Trip" && trip.tripStatus === "Completed" && !trip.paid && trip.priceUpdated) { %>
+					<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trip._id %>/payment/completePayment'">Confirm Payment</button>
+				<% } else if (trip.tripStatus === "Completed" && !trip.refunded) { %>
+					<button class="refund-button" onclick="window.location.href='/trips/<%= trip._id %>/refund'">Request a refund</button>
 				<% } else if (trip.tripStatus === "Pending") { %>
-				<div class="button-container">
-					<button class="btn btn-success" onclick="window.location.href='/trips/<%= trip._id %>/verify-edit'">Edit Trip</button>
-					<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trip._id %>/verify-cancel'">Cancel Trip</button>
-				</div>
+					<div class="button-container">
+						<button class="btn btn-success" onclick="window.location.href='/trips/<%= trip._id %>/verify-edit'">Edit Trip</button>
+						<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trip._id %>/verify-cancel'">Cancel Trip</button>
+					</div>
 				<% } else if(trip.tripType === "Road Trip" && trip.tripStatus === "Confirmed" && !trip.paid && trip.priceUpdated) { %>
-					<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trip._id %>/payment/completePayment'">Capture Payment</button>
+					<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trip._id %>/payment/completePayment'">Confirm Payment</button>
 					<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trip._id %>/verify-cancel'">Cancel Trip</button>
 				<% } else if (trip.tripStatus === "Confirmed" && trip.paid) { %>
+					<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trip._id %>/verify-cancel'">Cancel Trip</button>
+				<% } else if (trip.tripStatus === "Confirmed" && trip.tripType === "Road Trip"  && !trip.paid) { %>
+					<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trip._id %>/payment'">Pay Initial Amount</button>
 					<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trip._id %>/verify-cancel'">Cancel Trip</button>
 				<% } else if (trip.tripStatus === "Confirmed") { %>
 					<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trip._id %>/payment'">Pay Now</button>

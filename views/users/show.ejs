@@ -81,11 +81,14 @@
 					<% } else if (trips[i].tripStatus === "Confirmed" && trips[i].paid) { %>
 						<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trips[i]._id %>/verify-cancel'">Cancel Trip</button>
 					<% } else if(trips[i].tripType === "Road Trip" && trips[i].tripStatus === "Confirmed" && !trips[i].paid) { %>
-						<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/completePayment'">Capture Payment</button>
+						<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/completePayment'">Confirm Payment</button>
 						<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trips[i]._id %>/verify-cancel'">Cancel Trip</button>
                     <% } else if (trips[i].tripStatus === "Confirmed") { %>
 						<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment'">Pay Now</button>
                         <button class="btn btn-danger" onclick="window.location.href='/trips/<%= trips[i]._id %>/verify-cancel'">Cancel Trip</button>
+					<% } %>
+					<% if(trips[i].tripStatus === "Completed" && trips[i].tripType === "Road Trip" && !trips[i].paid && trips[i].priceUpdated) { %>
+						<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/completePayment'">Confirm Payment</button>
 					<% } %>
                     <button class="btn btn-info" onclick="window.location.href='/trips/<%= trips[i]._id %>'">Trip Status</button><br><br>
                 </div>

@@ -37,7 +37,7 @@ const getTripParams = (body) => {
 
 
 function calculateTravelTime(pickupAddress, dropOffAddress) {
-  var url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(pickupAddress)}&destinations=${encodeURIComponent(dropOffAddress)}&units=imperial&key=${process.env.MPASS}`;
+  var url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(pickupAddress)}&destinations=${encodeURIComponent(dropOffAddress)}&units=imperial&key=AIzaSyAV40-7YnOohlzydiiZsT4VN8ZGscHwdno`;
 
   var config = {
     method: 'get',
@@ -364,7 +364,7 @@ create: async (req, res, next) => {
 				// if the trip is less than 4 hours away, redirect to the new trip page and display an error
 				if (hours < 4 || (hours >= 4 && diff[1] === "mins")) {
 					res.locals.redirect = '/trips/new';
-					req.flash('error', 'Trip must be at least 4 hours long.');
+					req.flash('error', 'Road trip must be at least 4 hours long.');
 					next();
 					return;
 				}
@@ -529,7 +529,7 @@ create: async (req, res, next) => {
 			// if the trip is less than 4 hours away, redirect to the new trip page and display an error
 			if (hours < 4 || (hours >= 4 && diff[1] === "mins")) {
 				res.locals.redirect = `/trips/${tripId}/verify-edit`;
-				req.flash('error', 'Trip must be at least 4 hours long.');
+				req.flash('error', 'Road trip must be at least 4 hours long.');
 				next();
 				return;
 			}

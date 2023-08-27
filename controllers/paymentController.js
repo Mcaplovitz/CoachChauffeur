@@ -1,5 +1,5 @@
 const { squareClient: square, ApiError } = require('../public/js/squareClient');
-const { send } = require('micro');
+const { send, bail } = require('micro');
 const { retry } = require('@lifeomic/attempt');
 const { validatePaymentPayload } = require('../models/paymentSchema');
 const Trip = require("../models/trip");
@@ -72,6 +72,8 @@ module.exports = {
 				// If a trip is a road trip, we don't want to autocomplete the payment
 				if(savedTrip.tripType === "Road Trip") {
 					payment.autocomplete = false;
+					// set the delay duration to 3 weeks
+					// payment.delayDuration = "P21D";
 				}
 
 				if (payload.customerId) {
@@ -107,7 +109,7 @@ module.exports = {
 				sendEmail(savedTrip.tripUserEmail, "Payment Successful", "payment", savedTrip, null);
 				if(savedTrip.tripType === "Road Trip") {
 					savedTrip.paid = false;
-					
+		
 				}
 				await savedTrip.save();
 				paymentCreated = true;

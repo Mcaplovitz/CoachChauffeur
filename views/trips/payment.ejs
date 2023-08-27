@@ -126,7 +126,11 @@
   <body>
     <form id="payment-form" style="max-height: 80px;">
       <div id="card-container"></div>
+	  <% if (trip.tripType == "Road Trip") { %>
+		<button id="card-button" type="button">Approve For $<%= trip.price.toFixed(2) %></button>
+	  <% } else { %>
       <button id="card-button" type="button">Pay $<%= trip.price.toFixed(2) %></button>
+	  <% } %>
     </form>
     <div id="payment-status-container"></div>
   </body>

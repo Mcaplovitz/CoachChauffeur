@@ -68,20 +68,26 @@
                             <form action="/trips/<%= trips[i]._id %>/complete" method="POST">
                             <button class="button" type="submit">Mark as Completed</button>
                             </form>
+							<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/completePayment'">Confirm Initial Payment</button>
                         <% } else if (trips[i].tripStatus === "Confirmed" || trips[i].tripStatus === "Pending") { %>
                             <% if (currentUser && currentUser.isAdmin && loggedIn) { %>
 								<% if (trips[i].tripStatus === "Pending") { %>
 									<button class="btn btn-success" onclick="window.location.href='/trips/<%= trips[i]._id %>/verify-edit'">Approve</button>
 									<button class="btn btn-danger" onclick="window.location.href='/trips/<%= trips[i]._id %>/cancel'">Deny</button>
-								<% } else if (trips[i].tripStatus === "Confirmed" && trips[i].tripType === "Road Trip" && !trips[i].paid) { %>
-									<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/updatePayment'">Update Payment</button>
+								<%# } else if (trips[i].tripStatus === "Confirmed" && trips[i].tripType === "Road Trip" && !trips[i].paid) { %>
+									
 								<% } else if (trips[i].tripStatus === "Confirmed") { %>
 									<form action="/trips/<%= trips[i]._id %>/in-progress" method="post" onsubmit="return confirm('Are you sure you want to update the trip status to In-Progress?')">
 									<button class="btn btn-primary" type="submit">Update to In-Progress</button>
 									</form>
+									<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/completePayment'">Confirm Initial Payment</button>
 								<% } %>
                             <% } %>
-                        <% } %>
+						<% } %>
+						<% if (trips[i].tripStatus === "Completed") { %>
+							<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/updatePayment'">Update Payment</button>
+							<button class="btn btn-dark" onclick="window.location.href='/trips/<%= trips[i]._id %>/payment/completePayment'">Confirm Payment</button>
+						<% } %>
                         <button class="btn btn-info" onclick="window.location.href='/trips/<%= trips[i]._id %>'" style="color: white;"> More Info</button>
   
                     </div>

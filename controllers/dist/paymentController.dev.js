@@ -5,7 +5,8 @@ var _require = require('../public/js/squareClient'),
     ApiError = _require.ApiError;
 
 var _require2 = require('micro'),
-    send = _require2.send;
+    send = _require2.send,
+    bail = _require2.bail;
 
 var _require3 = require('@lifeomic/attempt'),
     retry = _require3.retry;
@@ -118,7 +119,8 @@ module.exports = {
                       }; // If a trip is a road trip, we don't want to autocomplete the payment
 
                       if (savedTrip.tripType === "Road Trip") {
-                        payment.autocomplete = false;
+                        payment.autocomplete = false; // set the delay duration to 3 weeks
+                        // payment.delayDuration = "P21D";
                       }
 
                       if (payload.customerId) {
